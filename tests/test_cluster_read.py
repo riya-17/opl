@@ -166,12 +166,10 @@ class TestRequestedInfo(unittest.TestCase):
         self.assertEqual(v, "Hello world")
         sd.set(k, v)
 
-        k, v = next(ri)
-        self.assertEqual(k, "mycopyfrom_exists")
-        self.assertEqual(v, "Hello world")
-        k, v = next(ri)
-        self.assertEqual(k, "mycopyfrom_missing")
-        self.assertEqual(v, None)
+        for v1, v2 in [("mycopyfrom_exists", "Hello world"),("mycopyfrom_missing", None)]:
+            k, v = next(ri)
+            self.assertEqual(k, v1)
+            self.assertEqual(v, v2)
 
     def test_copy_from_previous(self):
         string = """
